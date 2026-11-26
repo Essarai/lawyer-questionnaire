@@ -22,7 +22,7 @@ identityPage = function () {
   const locations=choiceField('base.city','所在城市',[],{multi:false,kind:'city',required:true})+
     field('base.outOfTown','是否接受异地办案？',{...req,type:'select',options:['接受','视案件情况而定','暂不接受']});
   const life=field('base.motivation','当初是什么原因让你选择成为一名律师？',{type:'textarea'})+
-    field('base.personalTags','身边的人通常用哪些标签形容你？',{type:'textarea'});
+    field('base.personalTags','可以用哪些标签形容你？',{type:'textarea'});
   return `<div class="identity-panel">
     <section><h2>基础信息</h2><div class="identity-grid">${basics}</div></section>
     <section id="identity-location"><h2>执业与接案地点</h2><div class="identity-grid">${locations}</div>
