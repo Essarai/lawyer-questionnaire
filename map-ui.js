@@ -234,7 +234,7 @@ function personaEditor(a,pr,ai,idx) {
 function boardSettings() {
   return '<h3>通用接案边界</h3>'+ 
     field('global.exclude','有哪些类型的案件、法律事务或委托，即使客户主动找到你，你也通常不会承接？',{type:'textarea',required:true,placeholder:'没有额外限制可填“暂无”。'})+
-    mapDirection();
+    mf('global.consultations','您希望每月通过自媒体获得多少有效咨询？',{type:'select',options:['暂无明确目标','1—5','6—10','11—30','31以上']});
 }
 function openBoardSettings(inputId='f_businessAreas_input') {
   const panel=document.getElementById('board-settings');

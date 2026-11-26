@@ -81,9 +81,9 @@ function careerEntry(job, index, open) {
   const moment = field(path + '.moment','回顾这段经历，有没有哪件事情让你特别有成就感，或者至今仍然印象深刻？有没有哪个人也让你印象深刻？',
     {...input,type:'textarea',placeholder:'可以写当时发生了什么、你做了什么，或那个人说过什么、做过什么，以及这些经历对你的影响。'});
   const supplement = field(path + '.supplement','你还有什么想补充的吗？',{...input,type:'textarea'});
-  return `<article class="career-entry">${heading}<div id="career-entry-${index}" class="career-entry-body" ${open?'':'hidden'}>
+  return `<article class="career-entry"><div class="career-entry-header">${heading}<button type="button" class="career-delete" ${state.jobs.length?'':'hidden'} onclick="removeEntry('jobs',${index})">删除这段经历</button></div><div id="career-entry-${index}" class="career-entry-body" ${open?'':'hidden'}>
     <div class="career-job-facts" oninput="updateJobHeading(${index})">${basics}</div>${work}${moment}${supplement}
-    <button type="button" class="career-delete" ${state.jobs.length?'':'hidden'} onclick="removeEntry('jobs',${index})">删除这段经历</button></div></article>`;
+    </div></article>`;
 }
 function careerPage() {
   const jobs = state.jobs;
