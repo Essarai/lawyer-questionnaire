@@ -264,3 +264,5 @@ button:focus-visible{outline:2px solid #315fe9;outline-offset:3px}
 .product-priority-label{display:inline-block;vertical-align:middle;margin-left:8px;padding:2px 7px;border-radius:4px;background:#edf2ff;color:#315fe9;font-size:11px;font-weight:500;font-style:normal;line-height:18px}
 
 .answer-example{color:#8490a5;font-size:13px;line-height:1.7;margin:8px 0 16px;white-space:pre-line}#content textarea::placeholder{color:#8490a5;opacity:1}
+
+main>header{justify-content:flex-end}#crumb[hidden]{display:none!important}

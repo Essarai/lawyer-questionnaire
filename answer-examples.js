@@ -26,8 +26,8 @@ const renderBeforeExamples=render;
 render=function(){renderBeforeExamples();document.querySelectorAll('#content textarea').forEach(input=>{
  const key=input.id==='customer-quotes'?input.id:input.id.replace(/^f_/,'').replace(/_input$/,'').replace(/_\d+(?=_|$)/g,'_#');
  const example=answerExamples[key];if(!example)return;
- input.placeholder='回答示例（虚构，仅供参考）：\n'+example;
+ input.placeholder=example;
  if(input.value.trim()){
- const hint=document.createElement('p');hint.className='answer-example';hint.id=input.id+'-example';hint.textContent='回答示例（虚构，仅供参考）：'+example;input.after(hint);input.setAttribute('aria-describedby',hint.id);
+ const hint=document.createElement('p');hint.className='answer-example';hint.id=input.id+'-example';hint.textContent=example;input.after(hint);input.setAttribute('aria-describedby',hint.id);
  }
 });};

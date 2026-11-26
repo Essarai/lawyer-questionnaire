@@ -5,17 +5,17 @@ const lanInitialAnswers = {
     "city": "上海市",
     "scope": "local",
     "specified": [],
-    "name": "林知衡（虚构）",
-    "display": "林律师（演示）",
+    "name": "林知衡",
+    "display": "林律师",
     "status": "正常执业",
-    "firm": "海岑律师事务所（虚构）",
+    "firm": "海岑律师事务所",
     "role": "专职律师",
     "years": "5年及以上",
-    "qualification": "律师执业资格（模拟）",
+    "qualification": "律师执业资格",
     "languages": [
       "普通话"
     ],
-    "school": "示例大学法学院（虚构）",
+    "school": "某大学法学院",
     "degree": "硕士",
     "major": "劳动与社会保障法",
     "cross": "人力资源管理",
@@ -39,7 +39,7 @@ const lanInitialAnswers = {
   "jobs": [
     {
       "time": "2020年至今",
-      "organization": "海岑律师事务所（虚构）",
+      "organization": "海岑律师事务所",
       "position": "专职律师",
       "responsibility": "处理劳动关系认定、解除补偿争议，协助客户整理证据、准备仲裁及诉讼材料。"
     }
@@ -214,7 +214,7 @@ const lanInitialAnswers = {
       "bounce": "",
       "bounceUnknown": false,
       "highConsultation": "《收到解除通知后的材料清单》",
-      "period": "近30天（模拟）",
+      "period": "近30天",
       "fetchedAt": "2026-11-24T09:59:39.582Z"
     }
   ],
@@ -222,7 +222,7 @@ const lanInitialAnswers = {
     "cases": [
       {
         "id": "mock-case-01",
-        "name": "示例事项 A · 无书面合同的用工争议（虚构）",
+        "name": "示例事项 A · 无书面合同的用工争议",
         "type": "劳动仲裁",
         "domain": "劳动人事与社会保障 / 劳动关系认定",
         "industry": "互联网服务",

@@ -42,7 +42,7 @@ function makeBusinessDemo() {
     offering('离婚协议起草','双方已达成初步意向，需要落实为书面条款。','核对财产清单，起草协议并根据反馈修改一轮。','按件',2800,[[parent,'先确认双方已达成共识的事项。']])
   ];
   return {version:'business-map-v6',answerRevision:5,demo:true,
-    base:{name:'陈知予（虚构）',display:'陈律师',firm:'示例律师事务所（虚构）',qualification:'律师执业资格',years:'5年及以上',
+    base:{name:'陈知予',display:'陈律师',firm:'示例律师事务所',qualification:'律师执业资格',years:'5年及以上',
       role:'合伙人',province:'浙江省',city:'杭州市',outOfTown:'视案件情况而定',languages:['普通话']},
     global:{consultations:'6—10',exclude:'不承接存在利益冲突的委托；不接受以保证胜诉或保证回款为前提的委托。'},
     businessAreas:[labor,trade,family],experience:[],jobs:[],method:'先核对事实和材料，再与客户确认希望实现的结果。',
