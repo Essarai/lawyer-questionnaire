@@ -14,21 +14,23 @@ function regionForm(){return box('所在城市与服务地区',`<div class="grid
 identityPage = function () {
   const req={required:true}, b=state.base;
   const basics=field('base.name','姓名',req)+field('base.display','对外展示称呼',{...req,placeholder:'例如：张律师'})+
-    field('base.firm','所在律所',req)+field('base.years','执业年限',{...req,type:'select',options:['未满3年','3年至未满5年','5年及以上']})+
-    field('base.qualification','职业资格',req)+choiceField('base.role','角色身份',['个人律师','合伙人','律所主任','团队负责人','专职律师','兼职律师'],{multi:false,custom:true})+
+    choiceField('base.role','角色身份',['个人律师','职业律师','合伙人','兼职律师'],{multi:false,custom:false})+
+    (b.role==='个人律师'?'':field('base.firm','所在律所',{placeholder:'可填写当前所在律所'}))+
+    field('base.years','执业年限',{...req,type:'select',options:['未满3年','3年至未满5年','5年及以上']})+
+    field('base.qualification','职业资格',req)+
     choiceField('base.mbti','MBTI（选填）',mbtiTypes,{multi:false})+
     checks('base.languages','可使用语言',['普通话','英语','粤语','其他方言或语言'])+
     ((b.languages||[]).includes('其他方言或语言')?field('base.languageOther','其他方言或语言'):'');
   const locations=choiceField('base.city','所在城市',[],{multi:false,kind:'city',required:true})+
     field('base.outOfTown','是否接受异地办案？',{...req,type:'select',options:['接受','视案件情况而定','暂不接受']});
   const life=field('base.motivation','当初是什么原因让你选择成为一名律师？',{type:'textarea'})+
-    field('base.personalTags','可以用哪些标签形容你？',{type:'textarea'});
+    field('base.personalTags','可以用哪些标签形容你？',{type:'textarea'})+field('base.lifeSupplement','有什么补充吗？',{type:'textarea'});
   return `<div class="identity-panel">
     <section><h2>基础信息</h2><div class="identity-grid">${basics}</div></section>
     <section id="identity-location"><h2>执业与接案地点</h2><div class="identity-grid">${locations}</div>
       <p class="small muted">异地指法院、仲裁机构或项目现场在执业城市以外。</p></section>
     <section><h2>专业背景 <small>选填</small></h2>${existingExperience()}${backgroundFields()}</section>
-    <section><h2>人生地图 <small>选填</small></h2><div class="identity-grid">${life}</div></section>
+    <section><h2>人生地图 <small>选填</small></h2><div class="open-question-list">${life}</div></section>
 </div>`;
 };
 function selectedDomain(path){return state.businessAreas.some(a=>a.path===path)}
@@ -61,7 +63,7 @@ accountPage=function() {
   }).join('');
 };
 function simulateParsedAccount(i){const a=state.accounts[i];const mock={fans:'3,280',frequency:'每周 3 条',attributes:'30—45岁；上海为主',activity:'19:00—22:00 活跃',interest:'企业用工、劳动争议',interaction:'评论提问与收藏为主',themes:'咨询准备、劳动争议问答',origin:'平台推荐65%；搜索25%；其他10%',views:'26,800',comments:'184',likes:'676',favorites:'246',shares:'118',highViews:'首次咨询准备清单',highEngagement:'企业用工常见问题',watchTime:'28秒',unfollow:'1.2%',follow:'2.8%',related:'劳动合同问答',bounce:'23%'};a.stats=mock;a.fetchedAt=new Date().toISOString();changed();toast('已显示账号数据')}
-validate=function(){const out=[],add=(page,text)=>out.push({page,text});for(const [k,n] of [['name','姓名'],['display','对外展示称呼'],['status','执业状态'],['firm','所在律所'],['years','执业年限'],['qualification','职业资格'],['province','所在省级地区'],['city','所在城市']])if(!state.base[k]?.trim())add(0,n);if(state.base.scope==='specified'&&(!state.base.specified.length||state.base.specified.some(r=>!r.province)))add(0,'指定服务地区');if(!state.businessAreas.length)add(2,'至少一个二级业务领域');if(state.businessAreas.length>3)add(2,'重点业务领域最多3项');if(!state.global.remote)add(2,'异地办案方式');if(!state.global.exclude.length)add(2,'不承接范围');state.businessAreas.forEach((a,ai)=>{const label='业务领域 '+(ai+1);if(!a.products.length)add(2,label+'至少一个产品');a.products.forEach((p,pi)=>{const n=label+' / 产品 '+(pi+1);if(!p.name.trim())add(2,n+'名称');if(!p.services.some(x=>x.trim()))add(2,n+'服务内容');if(!p.clients.length)add(2,n+'至少一个目标客户画像');p.clients.forEach((c,ci)=>{if(!c.identity.trim())add(2,n+' / 客户画像 '+(ci+1)+'的客户身份')});if(!p.feePrivate&&p.feeMin!==''&&p.feeMax!==''&&Number(p.feeMin)>Number(p.feeMax))add(2,n+'收费下限不能高于上限');if(!p.conditions.inherit&&(!p.conditions.region.trim()||!p.conditions.method))add(2,n+'独立承接地区与方式')})});if(!state.expression.taboo.trim())add(3,'不讨论的话题');return out};
+validate=function(){const out=[],add=(page,text)=>out.push({page,text});for(const [k,n] of [['name','姓名'],['display','对外展示称呼'],['status','执业状态'],['years','执业年限'],['qualification','职业资格'],['province','所在省级地区'],['city','所在城市']])if(!state.base[k]?.trim())add(0,n);if(state.base.scope==='specified'&&(!state.base.specified.length||state.base.specified.some(r=>!r.province)))add(0,'指定服务地区');if(!state.businessAreas.length)add(2,'至少一个二级业务领域');if(state.businessAreas.length>3)add(2,'重点业务领域最多3项');if(!state.global.remote)add(2,'异地办案方式');if(!state.global.exclude.length)add(2,'不承接范围');state.businessAreas.forEach((a,ai)=>{const label='业务领域 '+(ai+1);if(!a.products.length)add(2,label+'至少一个产品');a.products.forEach((p,pi)=>{const n=label+' / 产品 '+(pi+1);if(!p.name.trim())add(2,n+'名称');if(!p.services.some(x=>x.trim()))add(2,n+'服务内容');if(!p.clients.length)add(2,n+'至少一个目标客户画像');p.clients.forEach((c,ci)=>{if(!c.identity.trim())add(2,n+' / 客户画像 '+(ci+1)+'的客户身份')});if(!p.feePrivate&&p.feeMin!==''&&p.feeMax!==''&&Number(p.feeMin)>Number(p.feeMax))add(2,n+'收费下限不能高于上限');if(!p.conditions.inherit&&(!p.conditions.region.trim()||!p.conditions.method))add(2,n+'独立承接地区与方式')})});if(!state.expression.taboo.trim())add(3,'不讨论的话题');return out};
 review=function(){const issues=validate();return `<div class="statusbox">${state.confirmed?'画像已确认':issues.length?'还有 '+issues.length+' 项需要补充':'必填信息完整，可以确认画像'}</div>${issues.length?box('需要补充',issues.map(x=>`<div class="row summary-row"><span>${esc(x.text)}</span><button onclick="go(${x.page})">去填写</button></div>`).join('')):''}${box('律师与服务地区',`<p>${esc(state.base.name||'未填写姓名')} · ${esc(state.base.firm||'未填写律所')}</p><p>服务地区：${esc(serviceRegion())}</p>`)}${state.businessAreas.map(a=>box(esc(a.path),a.products.map(p=>`<div class="summary-row"><h3>${esc(p.name||'未命名产品')}</h3><p>服务：${p.services.filter(Boolean).map(esc).join('、')}</p><p>客户画像：${p.clients.map(c=>esc(c.identity||'未填写')).join('、')}</p></div>`).join(''))).join('')}<p class="small muted">所有数据仅保存在当前浏览器，平台数据为模拟解析。</p>`};
 exportAnswers=function(){const copy=JSON.parse(JSON.stringify(state));copy.supplement={cases:copy.supplement.cases};copy.businessAreas.forEach((a,i)=>{a.priority=i+1;a.products.forEach(p=>{p.conditions.effectiveRegion=p.conditions.inherit?serviceRegion():p.conditions.region;p.conditions.effectiveMethod=p.conditions.inherit?state.global.remote:p.conditions.method})});const u=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...copy},null,2)],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=u;a.download='律师画像_业务领域产品客户结构.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
 

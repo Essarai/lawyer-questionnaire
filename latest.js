@@ -78,12 +78,12 @@ function careerEntry(job, index, open) {
     field(path + '.time','任职时间',{...input,placeholder:'例如：2021 年至今'});
   const work = field(path + '.responsibility','这段经历里，你主要负责什么？',
     {...input,type:'textarea',placeholder:'例如：为企业审查劳动合同，并代理劳动争议案件。'});
-  const moment = field(path + '.moment','回顾这段经历，有没有哪件事情让你特别有成就感，或者至今仍然印象深刻？有没有哪个人也让你印象深刻？',
+  const moment = field(path + '.moment','回顾这段经历，有没有哪件事情/哪个人让你印象深刻',
     {...input,type:'textarea',placeholder:'可以写当时发生了什么、你做了什么，或那个人说过什么、做过什么，以及这些经历对你的影响。'});
   const supplement = field(path + '.supplement','你还有什么想补充的吗？',{...input,type:'textarea'});
-  return `<article class="career-entry"><div class="career-entry-header">${heading}<button type="button" class="career-delete" ${state.jobs.length?'':'hidden'} onclick="removeEntry('jobs',${index})">删除这段经历</button></div><div id="career-entry-${index}" class="career-entry-body" ${open?'':'hidden'}>
+  return `<article class="career-entry">${heading}<div id="career-entry-${index}" class="career-entry-body" ${open?'':'hidden'}>
     <div class="career-job-facts" oninput="updateJobHeading(${index})">${basics}</div>${work}${moment}${supplement}
-    </div></article>`;
+    <button type="button" class="career-delete" ${state.jobs.length?'':'hidden'} onclick="removeEntry('jobs',${index})">删除这段经历</button></div></article>`;
 }
 function careerPage() {
   const jobs = state.jobs;
@@ -117,5 +117,5 @@ review=function(){const issues=validate();return `<div class="statusbox">${state
 go=function(i){if(i<0||i>=titles.length)return;page=i;render();scrollTo(0,0)};
 nextPage=function(){if(page<6){go(page+1);return}if(validate().length){render();toast('请先补齐必填信息');return}state.confirmed=new Date().toISOString();save();render();toast('画像已统一确认')};
 let renderedPage;
-render=function(){const opened=renderedPage===page?[...document.querySelectorAll('#content details')].map((d,i)=>d.open?i:-1):[];renderedPage=page;$('#nav').innerHTML=titles.map((t,i)=>`<button class="nav ${page===i?'active':''}" onclick="go(${i})">${i<6?'0'+(i+1)+'. ':''}${t}</button>`).join('');$('#title').textContent=titles[page];$('#subtitle').textContent=subtitles[page];$('#crumb').textContent='画像问卷 / '+titles[page];$('#step').textContent=`步骤 ${page+1} / ${titles.length}`;$('#content').innerHTML=[identityPage,careerPage,businessPage,expressionLatest,accountPage,supplementPage,review][page]();document.querySelectorAll('details').forEach((d,i)=>d.open=opened.includes(i));$('#prev').disabled=page===0;$('#next').textContent=page===6?(state.confirmed?'画像已确认':'确认画像'):'下一步';$('#next').disabled=page===6&&!!state.confirmed};
+render=function(){const opened=renderedPage===page?[...document.querySelectorAll('#content details')].map((d,i)=>d.open?i:-1):[];renderedPage=page;$('#nav').innerHTML=titles.map((t,i)=>`<button class="nav ${page===i?'active':''}" onclick="go(${i})">${i<6?'0'+(i+1)+'. ':''}${t}</button>`).join('');$('#title').textContent=titles[page];$('#subtitle').textContent=subtitles[page];$('#crumb').textContent='画像问卷 / '+titles[page];$('#step').textContent=`步骤 ${page+1} / ${titles.length}`;$('#content').innerHTML=[identityPage,careerPage,businessPage,expressionLatest,extraMaterialsPage,supplementPage,review][page]();document.querySelectorAll('details').forEach((d,i)=>d.open=opened.includes(i));$('#prev').disabled=page===0;$('#next').textContent=page===6?(state.confirmed?'画像已确认':'确认画像'):'下一步';$('#next').disabled=page===6&&!!state.confirmed};
 exportAnswers=function(){const copy=JSON.parse(JSON.stringify(state));copy.products.forEach(p=>p.selectedServices=p.selected.map(i=>p.items[i]).filter(Boolean));const u=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...copy},null,2)],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=u;a.download='律师画像问卷_20261124.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};

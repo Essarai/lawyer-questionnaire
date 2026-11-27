@@ -37,10 +37,7 @@ productCustomers=function(a,p,ai,pi){
 const productPageBeforeEmbedded=businessPage;
 businessPage=function(){ensureProductTargets();return productPageBeforeEmbedded();};
 const boardBeforeEmbedded=businessBoard;
-businessBoard=function(){const root=document.createElement('div');root.innerHTML=boardBeforeEmbedded();root.querySelector('#board-profile')?.remove();root.querySelector('.board-counts')?.remove();root.querySelector('.entity-columns')?.classList.add('products-only');root.querySelectorAll('.entity-relations').forEach(el=>el.remove());
-root.querySelector('.entity-head button[onclick="openBoardSettings()"]')?.remove();
-const settings=root.querySelector('#board-settings');if(settings){settings.querySelector('summary').textContent='通用接案边界';const direction=document.createElement('section');direction.className='business-direction-panel';direction.innerHTML=twoLevelPicker()+'<p class="small muted">按前后顺序表示优先级，越靠前越优先。</p>';settings.before(direction);}
-return root.innerHTML;};
+businessBoard=function(){const root=document.createElement('div');root.innerHTML=boardBeforeEmbedded();root.querySelector('#board-profile')?.remove();root.querySelector('.board-counts')?.remove();root.querySelector('.entity-columns')?.classList.add('products-only');root.querySelectorAll('.entity-relations').forEach(el=>el.remove());return root.innerHTML;};
 const editorBeforeEmbedded=productEditor;
 productEditor=function(a,p,ai,pi){return editorBeforeEmbedded(a,p,ai,pi).replace('用户画像 · '+p.audiences.length,'用户画像');};
 const duplicateBeforeEmbedded=duplicateProduct;

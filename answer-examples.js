@@ -4,7 +4,7 @@ const answerExamples={
   "jobs_#_responsibility": "说明你服务的对象、经常处理的工作，以及自己具体负责的环节。",
   "jobs_#_moment": "选一件有成就感或难忘的事，或一位影响你的人，讲讲发生了什么、你做了什么，以及对你的影响。",
   "jobs_#_supplement": "补充这段经历中的转变、收获，或前面没有提到的重要信息；没有可留空。",
-  "global_exclude": "没有额外限制可填“暂无”。",
+  "global_exclude": "说明你通常不承接的案件类型、委托要求或具体情形，以及必要的原因；没有额外限制可填“暂无”。",
   "businessAreas_#_products_#_issues": "聚焦这款产品能解决的法律问题：客户遇到什么争议、困难或风险时会需要它？",
   "businessAreas_#_products_#_services": "按实际办理过程写出你会做的工作，以及客户能获得的文书、分析、代理或其他服务成果。",
   "businessAreas_#_products_#_conditions": "只补充这款产品特有的承接条件，可考虑事项阶段、材料要求、地域或服务范围；没有可留空。",
@@ -27,5 +27,4 @@ render=function(){renderBeforeExamples();document.querySelectorAll('#content tex
  const key=input.id==='customer-quotes'?input.id:input.id.replace(/^f_/,'').replace(/_input$/,'').replace(/_\d+(?=_|$)/g,'_#');
  const example=answerExamples[key];if(!example)return;
  input.placeholder=example;
-
 });};
