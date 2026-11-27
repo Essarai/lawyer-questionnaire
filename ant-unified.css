@@ -21,3 +21,17 @@
 .open-question-list{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}.open-question-list>.field{margin:0!important;min-width:0}.open-question-list>.field>label{display:block;margin-bottom:8px;font-size:14px;font-weight:400}.open-question-list .ant-control-host{width:100%}#content .open-question-list textarea.ant-input{min-height:112px!important;padding:7px 11px;font-size:14px;line-height:1.571429;border-radius:6px}@media(max-width:700px){#content .open-question-list textarea.ant-input{font-size:16px}}
 
 .inline-practice-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.inline-practice-domain{display:grid;gap:12px;min-width:0}.inline-practice-row{align-items:flex-start}.inline-practice-delete.ant-btn{margin-top:30px}@media(max-width:700px){.inline-practice-fields{grid-template-columns:minmax(0,1fr);gap:16px}}
+
+#nav .product-nav-primary,#nav .product-nav-primary.ant-btn{height:40px;min-height:40px;max-height:40px;padding:9px 16px;color:rgba(0,0,0,.88)}
+#nav .product-nav-current,#nav .product-nav-current.ant-btn{color:#1677ff;background:transparent;font-weight:500}
+#nav .product-nav-primary:disabled{background:transparent!important;border:0!important;color:rgba(0,0,0,.25)!important;cursor:not-allowed}
+#nav .product-nav-children{margin:0 0 12px;padding:0 0 8px;border-bottom:1px solid #f0f0f0}
+#nav .product-nav-children .nav,#nav .product-nav-children .nav.ant-btn{height:40px;min-height:40px;max-height:40px;padding:9px 12px 9px 32px;color:rgba(0,0,0,.65)}
+#nav .product-nav-children .nav.active{background:#e6f4ff!important;color:#1677ff!important}
+#nav .nav:focus-visible{outline:2px solid #1677ff;outline-offset:-2px}
+@media(max-width:800px){
+ #nav{display:grid;grid-template-columns:repeat(6,max-content);gap:0 8px;max-width:100%;overflow-x:auto}
+ #nav .product-nav-primary,#nav .product-nav-primary.ant-btn{min-width:100px;width:auto}
+ #nav .product-nav-children{grid-row:2;grid-column:1/-1;display:flex;gap:4px;margin:0;padding:0;border:0}
+ #nav .product-nav-children .nav,#nav .product-nav-children .nav.ant-btn{min-width:0;width:auto;padding:9px 12px;flex-shrink:0}
+}

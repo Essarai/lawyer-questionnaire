@@ -14,7 +14,7 @@ businessBoard=function(){
   panel.innerHTML=`<div class="secondary-domain-title"><h4>二级业务领域</h4><span>选填，可多选</span></div><div class="secondary-domain-options">${all.map((name,index)=>`<label class="secondary-domain-option"><input id="secondary-${ai}-${index}" type="checkbox" ${selected.includes(name)?'checked':''} aria-label="${esc(name)}" onchange="toggleSecondaryDomain(${ai},this.dataset.domain,this.checked)" data-domain="${esc(name)}"><span>${esc(name)}</span></label>`).join('')||'<p class="small muted">此领域暂无预设二级分类。</p>'}</div>`;
   section.querySelector('.legal-domain-header')?.after(panel);
   const create=section.querySelector('.legal-create-service');if(create){create.disabled=false;create.removeAttribute('title');}
-  section.querySelectorAll('.legal-secondary').forEach(label=>{if(label.textContent==='待选择二级领域')label.textContent=a.path;});
+  section.querySelectorAll('.product-card-main .legal-secondary').forEach(label=>label.remove());
   const empty=section.querySelector('.legal-empty p');if(empty)empty.textContent='点击“创建服务”填写服务内容。';
  });return root.innerHTML;
 };
