@@ -2,7 +2,7 @@
 titles[2]='法律服务'; titles[3]='达人风格';
 subtitles[2]='选择未来重点发展的法律业务，按优先级完善法律服务与用户画像。';
 subtitles[3]='上传表达材料，添加自媒体账号，补充表达边界与达人参考。';
-const visiblePages=[0,1,2,3,4,6];
+const visiblePages=[0,1,2,3,4];
 state.jobs.forEach(j=>j.id ||= uid());
 state.expression.files ||= [];
 const originalNewCareerJob=newCareerJob;
@@ -39,7 +39,7 @@ expressionLatest=function(){
  return upload+`<section class="style-accounts"><h2>自媒体账号</h2>${accountPage()}</section>`+box('表达边界',field('expression.taboo','有哪些话题，即使与你的专业领域或职业经历有关，你也不希望在公开平台讨论？',{type:'textarea',placeholder:'没有额外限制可填“暂无”。'}))+box('达人参考',field('expression.liked','偏好达人链接',{type:'textarea'})+field('expression.disliked','不偏好的达人或内容链接',{type:'textarea'}));
 };
 const originalGo=go;
-go=function(i,...args){originalGo(i===5?1:i,...args);};
+go=function(i,...args){originalGo(i===6?4:i===5?1:i,...args);};
 nextPage=function(){if(page===3){generatePortrait();return;}if(page===6){if(!state.portrait||portraitStale())generatePortrait();else confirmPortrait();return;}go(visiblePages[visiblePages.indexOf(page)+1]);};
 const originalRenderRevision=render;
 function serviceVocabulary(root){

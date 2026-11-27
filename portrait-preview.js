@@ -39,8 +39,8 @@ review=function(){
  box('03 · 目标用户',`<p>${esc(data.targetSummary)}</p>`+data.users.map(u=>`<div class="portrait-target"><h3>${esc(u.name)}</h3>${portraitRows([['用户特征',u.type],['典型场景',u.scene],['核心诉求',u.need],['对应服务',u.service]])}</div>`).join(''));
 };
 const renderBeforePortraitPreview=render;
-render=function(){renderBeforePortraitPreview();if(page===6){const next=$('#next');next.hidden=true;$('#prev').textContent='返回问卷';$('#prev').onclick=()=>go(4);$('#prev').disabled=false;document.querySelector('.bottom .muted').textContent='初步画像根据当前填写内容生成';}else $('#next').hidden=false;};
-nextPage=function(){if(page===4){generatePortrait();return;}if(page===6)return;go(visiblePages[visiblePages.indexOf(page)+1]);};
+render=function(){renderBeforePortraitPreview();if(page===6){const next=$('#next');next.hidden=true;$('#prev').textContent='返回问卷';$('#prev').onclick=()=>go(4);$('#prev').disabled=false;document.querySelector('.bottom .muted').textContent='初步画像根据当前填写内容生成';}else $('#next').hidden=page===4;};
+nextPage=function(){const next=visiblePages[visiblePages.indexOf(page)+1];if(next!==undefined)go(next);};
 setInterval(()=>{if(page===6&&state.portrait?.readyAt&&Date.now()>=Date.parse(state.portrait.readyAt)&&!detailedPortraitOpen&&!document.querySelector('.portrait-ready-notice button'))render();},15000);
 subtitles[6]='根据填写内容，形成初步人设、核心差异化与目标用户。';
 render();
