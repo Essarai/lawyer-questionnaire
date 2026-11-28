@@ -12,7 +12,7 @@ render=function(){
 function openDiagnosisModule(){
  diagnosisModuleOpen=true;
  let host=document.getElementById('diagnosis-module');
- if(!host){host=document.createElement('section');host.id='diagnosis-module';host.innerHTML='<iframe title="DNA诊断报告与报告库" src="diagnosis/index.html#/dna/user-1795072497041"></iframe>';document.body.append(host);}
+ if(!host){host=document.createElement('section');host.id='diagnosis-module';host.innerHTML='<iframe title="DNA诊断报告与报告库" src="diagnosis/index.html?v=20261128-clean#/dna/user-1795072497041"></iframe>';document.body.append(host);}
  render();
 }
 const goBeforeDiagnosisModule=go;
